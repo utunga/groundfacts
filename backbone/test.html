@@ -7,12 +7,15 @@
     <title></title>
 </head>
 <body>
-Test of backbone js
-<div id="mydiv"></div>
+<div id="myouterdiv">
+    <h1>Recent Tweets</h1>
+    <div id="mydiv"></div>
+</div>
 <script type="text/template" id="tweet-template">
     <div class="tweet">
-        <span class="timestamp"><%= timestamp %></span>
-        <span class="message"><%= message %></span>
+        Posted at <span class="timestamp"><%= timestamp %></span> by
+        <span class="user"><%= user %></span><br />
+        <p class="message"><%= message %></p>
     </div>
 </script>
 </body>

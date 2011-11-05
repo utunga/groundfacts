@@ -5,7 +5,8 @@ $(function() {
     window.Tweet = Backbone.Model.extend({
         defaults: {
                       timestamp: false,
-                      message: ''
+                      message: '',
+                      user: ''
                   }
     });
 
@@ -20,12 +21,6 @@ $(function() {
     // global collection of tweets
     window.Tweets = new Tweetset;
 
-    // manually add to the collection
-    window.Tweets.add({timestamp: 1234, message: 'this is a tweet'});
-    // another way
-    var myTweet = new window.Tweet({timestamp: 2345, message: 'another tweet'}) // new tweet using defaults
-    window.Tweets.add(myTweet);
-
     window.TweetView = Backbone.View.extend({
         tagName: "div",
         template: _.template($('#tweet-template').html()),
@@ -37,16 +32,32 @@ $(function() {
     });
 
     window.AppView = Backbone.View.extend({
-        el: $('#mydiv'),
+        el: $('#myouterdiv'),
 
         template: _.template($('#tweet-template').html()),
 
         initialize: function() {
-            //window.Tweets.fetch();
             this.render();
+            window.Tweets.bind('add', function(item) {
+                window.AppView.render();
+                console.log('rendering');
+            });
+        },
+
+        /*
+        events: {
+            'click input.add': 'addOne'
+        },
+        */
+
+        addOne: function() {
+            // test tweet
+            var newTweet = new window.Tweet({timestamp: 9999, message: 'new tweet', user: 'new user'});
+            window.Tweets.add(newTweet);
         },
 
         render: function() {
+            $('#mydiv').html('');
             window.Tweets.map(function(tweet) {
                 var view = new TweetView({model: tweet});
                 this.$('#mydiv').append(view.render().el);
@@ -57,4 +68,15 @@ $(function() {
     });
 
     window.AppView = new AppView;
+    $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:10,descending:'true'}, function(data) {
+        var rows = data.rows;
+        $.each(rows, function(index, item) {
+            var itemDate = item['key'][0];
+            var itemUser = item['key'][1];
+            var itemMessage = item['key'][2];
+            var myTweet = new window.Tweet({timestamp: itemDate, message: itemMessage, user: itemUser});
+            window.Tweets.add(myTweet);
+        });
+    }, 'jsonp');
 });
+
