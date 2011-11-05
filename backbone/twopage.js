@@ -86,15 +86,15 @@ $(function() {
     });
 
     window.AppView = new AppView;
-    $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:50,descending:'true'}, function(data) {
+    $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
         var rows = data.rows;
         $.each(rows, function(index, item) {
-            var itemDate = item['key'][0];
-            var itemUser = item['key'][1];
-            var itemProfileURL = item['key'][2];
-            var itemLat = item['key'][3];
-            var itemLon = item['key'][4];
-            var itemMessage = item['key'][5];
+            var itemDate = item['value']['created_at'];
+            var itemUser = item['value']['screen_name'];
+            var itemProfileURL = item['value']['profile_image_url'];
+            var itemLat = item['value']['lat'];
+            var itemLon = item['value']['lon'];
+            var itemMessage = item['value']['text'];
             var myTweet = new window.Tweet({
                 timestamp: itemDate,
                 user: itemUser,
