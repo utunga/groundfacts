@@ -1,0 +1,10 @@
+{
+  "env": {
+    "local" : {
+     "db" : "http://localhost:5984/groundfacts"
+    },
+    "remote" : {
+      "db" : "http://occutweet:worldpc@occutweet.cloudant.com/test"
+    }
+  }
+}
