@@ -85,7 +85,7 @@ $(function() {
                 profile_url: itemProfileURL,
                 lat: itemLat,
                 lon: itemLon,
-                message: itemMessage
+                message: TwitterText.auto_link(itemMessage)
             });
             window.Tweets.add(myTweet);
         });
