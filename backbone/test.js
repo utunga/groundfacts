@@ -40,7 +40,6 @@ $(function() {
             this.render();
             window.Tweets.bind('add', function(item) {
                 window.AppView.render();
-                console.log('rendering');
             });
         },
 
@@ -73,7 +72,7 @@ $(function() {
         $.each(rows, function(index, item) {
             var itemDate = item['key'][0];
             var itemUser = item['key'][1];
-            var itemMessage = item['key'][2];
+            var itemMessage = item['key'][5];
             var myTweet = new window.Tweet({timestamp: itemDate, message: itemMessage, user: itemUser});
             window.Tweets.add(myTweet);
         });

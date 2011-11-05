@@ -5,8 +5,11 @@ $(function() {
     window.Tweet = Backbone.Model.extend({
         defaults: {
                       timestamp: false,
+                      user: '',
+                      profile_url: '',
+                      lat: '',
+                      lon: '',
                       message: '',
-                      user: ''
                   }
     });
 
@@ -72,11 +75,18 @@ $(function() {
         $.each(rows, function(index, item) {
             var itemDate = item['key'][0];
             var itemUser = item['key'][1];
-            var itemImageURL = item['key'][2];
+            var itemProfileURL = item['key'][2];
             var itemLat = item['key'][3];
             var itemLon = item['key'][4];
             var itemMessage = item['key'][5];
-            var myTweet = new window.Tweet({timestamp: itemDate, message: itemMessage, user: itemUser});
+            var myTweet = new window.Tweet({
+                timestamp: itemDate,
+                user: itemUser,
+                profile_url: itemProfileURL,
+                lat: itemLat,
+                lon: itemLon,
+                message: itemMessage
+            });
             window.Tweets.add(myTweet);
         });
     }, 'jsonp');
