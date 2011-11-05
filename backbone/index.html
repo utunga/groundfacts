@@ -2,6 +2,9 @@
 <head>
 <title></title>
 <script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="underscore-min.js"></script>
+<script type="text/javascript" src="backbone.js"></script>
+<script type="text/javascript" src="groundfacts.js"></script>
 <script type="text/javascript"
         src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
@@ -113,28 +116,7 @@
         <div class="span-7 item-block">
             <h2>Latest news</h2>
             <div class="link-bar"><strong>Filtering:</strong> <a href="#">Strict</a> &nbsp;|&nbsp; <a href="#">Loose</a> &nbsp;|&nbsp; <a href="#">Off</a></div>
-            <div class="tweet">
-                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
-                <div class="data">
-                    <div class="date">23 Feb, 23:00 by cantswim</div>
-                    <div class="content">Stuck in my car in Ealing and the water is rising! #helpme #londonfloods</div>
-                </div>
-            </div>
-            <div class="tweet">
-                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
-                <div class="data">
-                    <div class="date">23 Feb, 23:00 by homeless</div>
-                    <div class="content">Here's what my house looks like now! #londonfloods<br />
-                    <img src="grey.gif" width="200" height="120" alt="Tweeted Picture" /></div>
-                </div>
-            </div>
-            <div class="tweet last">
-                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
-                <div class="data">
-                    <div class="date">23 Feb, 23:00 by lostsis</div>
-                    <div class="content">Looking for my sister Jane Smith, last seen at Victoria tube station #helpme</div>
-                </div>
-            </div>
+            <div id="mydiv">Loading...</div>
         </div>
   	</div>
   	<div class="span-8">
@@ -188,4 +170,13 @@
 	
   </div>
 </body>
+<script type="text/template" id="tweet-template">
+            <div class="tweet">
+                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
+                <div class="data">
+                    <div class="date"><%= timestamp %> by <%= user %></div>
+                    <div class="content"><%= message %></div>
+                </div>
+            </div>
+</script>
 </html>
