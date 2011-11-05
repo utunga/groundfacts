@@ -1,5 +1,5 @@
 
-$(function() {
+var loadBackbone = function() {
 
     // an individual tweet
     window.Tweet = Backbone.Model.extend({
@@ -59,6 +59,8 @@ $(function() {
         },
 
         render: function() {
+            // re-render the tweets (this redisplays them all
+            // any time *one* changes - not ideal)
             $('#mydiv').html('');
             window.Tweets.map(function(tweet) {
                 var view = new TweetView({model: tweet});
@@ -70,7 +72,7 @@ $(function() {
     });
 
     window.AppView = new AppView;
-    $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:10,descending:'true'}, function(data) {
+    $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:50,descending:'true'}, function(data) {
         var rows = data.rows;
         $.each(rows, function(index, item) {
             var itemDate = item['key'][0];
@@ -88,7 +90,18 @@ $(function() {
                 message: TwitterText.auto_link(itemMessage)
             });
             window.Tweets.add(myTweet);
+
+            if (itemLat !== null && itemLon !== null) {
+                // add point to the map
+                var myLatlng = new google.maps.LatLng(itemLat,itemLon);
+                var marker = new google.maps.Marker({
+                    position: myLatlng, 
+                    map: map,
+                    title: itemMessage
+                }); 
+            }
+            
         });
     }, 'jsonp');
-});
+};
 
