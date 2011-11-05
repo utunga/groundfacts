@@ -1,0 +1,191 @@
+<html>
+<head>
+<title></title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+  var map;
+  function initialize() {
+    var myOptions = {
+      zoom: 8,
+      center: new google.maps.LatLng(51.512, -0.118),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: false
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'),
+        myOptions);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<link rel="stylesheet" href="blueprint/screen.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="blueprint/print.css" type="text/css" media="print"> 
+<!--[if lt IE 8]>
+  <link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection">
+<![endif]-->
+
+<style type="text/css">
+    .item-block {
+        border: 1px solid #bbb;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .item-block h2 {
+        background-color: #eee;
+        margin: -5px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .item-block .link-bar {
+        margin: -5px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ccc;
+        padding: 1px 5px 3px;
+    }
+    .item-block .tweet {
+        display: table;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        padding: 10px 0px;
+    }
+    .item-block .tweet.last {
+        border-bottom: 0;
+    }
+    .item-block .tweet img {
+        border: 1px solid #ccc;
+    }
+    .item-block .user {
+        display: table-cell;
+        text-align: center;
+        vertical-align: top;
+        width: 15%;
+    }
+    .item-block .data {
+        display: table-cell;
+        width:  85%;
+        padding: 0 10px;
+    }
+    .item-block .data .date {
+        color: #666;
+
+    }
+    .item-block #map_canvas {
+        height: 160px;
+        background: #eee;
+        margin: 3px;
+        border: 1px solid #ccc;
+    }
+    .item-block #photo-gallery {
+        height: 160px;
+        background: #eee;
+        margin: 3px;
+        border: 1px solid #ccc;
+    }
+    .item-block .launch-button {
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
+        background: #ffc;
+        border: 1px solid #996;
+        display: block;
+        margin: auto;
+        cursor: pointer;
+    }
+    .item-block .launch-button:hover {
+        background: #ff9;
+    }
+</style>
+
+</head>
+<body>
+<div class="container">
+  	<div class="span-23">
+        <hr />
+        <h1>Hash News: come for the news, stay to help</h1>
+        <hr />
+  	</div>
+
+  	<div class="span-8">
+        <div class="span-7 item-block">
+            <h2>Latest news</h2>
+            <div class="link-bar"><strong>Filtering:</strong> <a href="#">Strict</a> &nbsp;|&nbsp; <a href="#">Loose</a> &nbsp;|&nbsp; <a href="#">Off</a></div>
+            <div class="tweet">
+                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
+                <div class="data">
+                    <div class="date">23 Feb, 23:00 by cantswim</div>
+                    <div class="content">Stuck in my car in Ealing and the water is rising! #helpme #londonfloods</div>
+                </div>
+            </div>
+            <div class="tweet">
+                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
+                <div class="data">
+                    <div class="date">23 Feb, 23:00 by homeless</div>
+                    <div class="content">Here's what my house looks like now! #londonfloods<br />
+                    <img src="grey.gif" width="200" height="120" alt="Tweeted Picture" /></div>
+                </div>
+            </div>
+            <div class="tweet last">
+                <div class="user"><img src="grey.gif" width="40" height="40" /></div>
+                <div class="data">
+                    <div class="date">23 Feb, 23:00 by lostsis</div>
+                    <div class="content">Looking for my sister Jane Smith, last seen at Victoria tube station #helpme</div>
+                </div>
+            </div>
+        </div>
+  	</div>
+  	<div class="span-8">
+        <div class="span-7 item-block">
+            <h2>Map view</h2>
+            <div id="map_canvas"></div>
+            <a href="#">View full size map</a>
+        </div>
+        <div class="span-7 item-block">
+            <h2>Latest photos</h2>
+            <div id="photo-gallery">
+                <img src="floodpics/pic5.jpg" width="262" height="160" alt="Gallery Picture" />
+            </div>
+        </div>
+  	</div>
+  	<div class="span-8 last">
+        <div class="span-7 item-block">
+            <h2>Get involved</h2>
+            <h4>You can help by filtering the raw data feed<h4>
+            <input type="button" name="getinvolved" value="Get Started!" class="launch-button"/>
+        </div>
+        <div class="span-7 item-block">
+            <h2>Tags and location</h2>
+            <strong>Tags</strong><br />
+            <p><a href="#">Petrol</a> <a href="#">Water</a> <a href="#">Incident</a> <a href="#">Transport</a> <a href="#">HelpMe</a> <a href="#">Trains</a> <a href="#">Tube</a> <a href="#">Hospitals</a> <a href="#">Groceries</a> <a href="#">Forecasts</a></p>
+            <strong>Location</strong><br />
+            <p><a href="#">North</a> <a href="#">South</a> <a href="#">East</a> <a href="#">West</a> <a href="#">Central</a> <a href="#">Ealing</a>
+            <a href="#">Westminster</a> <a href="#">Harrow</a> <a href="#">Tottenham</a> <a href="#">Camden</a> <a href="#">Croyden</a> <a href="#">Hammersmith</a> <a href="#">Lambeth</a> <a href="#">Merton</a> <a href="#">Hounslow</a> <a href="#">Lewisham</a> <a href="#">Harrow</a> <a href="#">Wandsworth</a> <a href="#">Richmond</a> <a href="#">Sutton</a> <a href="#">Southwark</a></p>
+        </div>
+        <div class="span-7 item-block">
+            <h2>User contributions</h2>
+            <p><strong>456</strong> of <strong>3456</strong> tweets have been classified by <strong>223</strong> users.</p>
+            <h3>Top contributors</h3>
+            <table>
+                <tr>
+                    <th>User</th><th>Tweets</th>
+                </tr>
+                <tr>
+                    <td>Joe Bloggs</td><td>123</td>
+                </tr>
+                <tr>
+                    <td>Jane Doe</td><td>83</td>
+                </tr>
+                <tr>
+                    <td>Mike Smith</td><td>45</td>
+                </tr>
+            </table>
+            <a href="#">View all contributors</a> &nbsp;|&nbsp; <a href="#">Get Involved</a>
+        </div>
+  	</div>
+	
+  </div>
+</body>
+</html>
