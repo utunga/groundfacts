@@ -23,7 +23,7 @@ $(function() {
     // manually add to the collection
     window.Tweets.add({timestamp: 1234, message: 'this is a tweet'});
     // another way
-    var myTweet = new window.Tweet // new tweet using defaults
+    var myTweet = new window.Tweet({timestamp: 2345, message: 'another tweet'}) // new tweet using defaults
     window.Tweets.add(myTweet);
 
     window.TweetView = Backbone.View.extend({
@@ -49,7 +49,7 @@ $(function() {
         render: function() {
             window.Tweets.map(function(tweet) {
                 var view = new TweetView({model: tweet});
-                $(this.el).append(view.render().el);
+                this.$('#mydiv').append(view.render().el);
             });
             return this;
         },
