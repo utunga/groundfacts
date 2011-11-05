@@ -90,66 +90,24 @@
 <div class="container">
   	<div class="span-23">
         <hr />
-        <h1>Hash News: come for the news, stay to help</h1>
+        <h1>Ground Facts: All vs Filtered</h1>
         <hr />
   	</div>
 
-  	<div class="span-8">
-        <div class="span-7 item-block">
-            <h2>Latest news</h2>
-            <div class="link-bar"><strong>Filtering:</strong> <a href="#">Strict</a> &nbsp;|&nbsp; <a href="#">Loose</a> &nbsp;|&nbsp; <a href="#">Off</a></div>
-            <div id="mydiv">Loading...</div>
+    <div id="appdiv">
+  	<div class="span-11">
+        <div class="span-11 item-block">
+            <h2>All news</h2>
+            <div id="alldiv">Loading...</div>
         </div>
   	</div>
-  	<div class="span-8">
-        <div class="span-7 item-block">
-            <h2>Map view</h2>
-            <div id="map_canvas"></div>
-            <a href="#">View full size map</a>
-        </div>
-        <div class="span-7 item-block">
-            <h2>Latest photos</h2>
-            <div id="photo-gallery">
-                <img src="floodpics/pic5.jpg" width="262" height="160" alt="Gallery Picture" />
-            </div>
+  	<div class="span-11 prepend-1 last">
+        <div class="span-11 item-block">
+            <h2>Filtered news</h2>
+            <div id="filtereddiv">Loading...</div>
         </div>
   	</div>
-  	<div class="span-8 last">
-        <div class="span-7 item-block">
-            <h2>Get involved</h2>
-            <h4>You can help by filtering the raw data feed<h4>
-            <input type="button" name="getinvolved" value="Get Started!" class="launch-button"/>
-        </div>
-        <div class="span-7 item-block">
-            <h2>Tags and location</h2>
-            <strong>Tags</strong><br />
-            <p><a href="#">Petrol</a> <a href="#">Water</a> <a href="#">Incident</a> <a href="#">Transport</a> <a href="#">HelpMe</a> <a href="#">Trains</a> <a href="#">Tube</a> <a href="#">Hospitals</a> <a href="#">Groceries</a> <a href="#">Forecasts</a></p>
-            <strong>Location</strong><br />
-            <p><a href="#">North</a> <a href="#">South</a> <a href="#">East</a> <a href="#">West</a> <a href="#">Central</a> <a href="#">Ealing</a>
-            <a href="#">Westminster</a> <a href="#">Harrow</a> <a href="#">Tottenham</a> <a href="#">Camden</a> <a href="#">Croyden</a> <a href="#">Hammersmith</a> <a href="#">Lambeth</a> <a href="#">Merton</a> <a href="#">Hounslow</a> <a href="#">Lewisham</a> <a href="#">Harrow</a> <a href="#">Wandsworth</a> <a href="#">Richmond</a> <a href="#">Sutton</a> <a href="#">Southwark</a></p>
-        </div>
-        <div class="span-7 item-block">
-            <h2>User contributions</h2>
-            <p><strong>456</strong> of <strong>3456</strong> tweets have been classified by <strong>223</strong> users.</p>
-            <h3>Top contributors</h3>
-            <table>
-                <tr>
-                    <th>User</th><th>Tweets</th>
-                </tr>
-                <tr>
-                    <td>Joe Bloggs</td><td>123</td>
-                </tr>
-                <tr>
-                    <td>Jane Doe</td><td>83</td>
-                </tr>
-                <tr>
-                    <td>Mike Smith</td><td>45</td>
-                </tr>
-            </table>
-            <a href="#">View all contributors</a> &nbsp;|&nbsp; <a href="#">Get Involved</a>
-        </div>
-  	</div>
-	
+    </div>
   </div>
 </body>
 <script type="text/template" id="tweet-template">

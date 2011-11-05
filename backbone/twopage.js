@@ -23,6 +23,7 @@ $(function() {
  
     // global collection of tweets
     window.Tweets = new Tweetset;
+    window.FilteredTweets = new Tweetset;
 
     window.TweetView = Backbone.View.extend({
         tagName: "div",
@@ -35,14 +36,18 @@ $(function() {
     });
 
     window.AppView = Backbone.View.extend({
-        el: $('#myouterdiv'),
+        el: $('#appdiv'),
 
         template: _.template($('#tweet-template').html()),
 
         initialize: function() {
-            this.render();
+            this.renderAll();
+            this.renderFiltered();
             window.Tweets.bind('add', function(item) {
-                window.AppView.render();
+                window.AppView.renderAll();
+            });
+            window.FilteredTweets.bind('add', function(item) {
+                window.AppView.renderFiltered();
             });
         },
 
@@ -58,13 +63,22 @@ $(function() {
             window.Tweets.add(newTweet);
         },
 
-        render: function() {
+        renderAll: function() {
             // re-render the tweets (this redisplays them all
             // any time *one* changes - not ideal)
-            $('#mydiv').html('');
+            $('#alldiv').html('');
             window.Tweets.map(function(tweet) {
                 var view = new TweetView({model: tweet});
-                this.$('#mydiv').append(view.render().el);
+                this.$('#alldiv').append(view.render().el);
+            });
+            return this;
+        },
+
+        renderFiltered: function() {
+            $('#filtereddiv').html('');
+            window.FilteredTweets.map(function(tweet) {
+                var view = new TweetView({model: tweet});
+                this.$('#filtereddiv').append(view.render().el);
             });
             return this;
         },
@@ -90,6 +104,7 @@ $(function() {
                 message: TwitterText.auto_link(itemMessage)
             });
             window.Tweets.add(myTweet);
+            window.FilteredTweets.add(myTweet);
             
         });
     }, 'jsonp');
