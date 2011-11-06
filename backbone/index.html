@@ -12,14 +12,19 @@
   var map;
   function initialize() {
     var myOptions = {
-      zoom: 8,
-      center: new google.maps.LatLng(51.512, -0.118),
+      zoom: 11,
+      center: new google.maps.LatLng(-43.520672,172.638474),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false
     };
     map = new google.maps.Map(document.getElementById('map_canvas'),
         myOptions);
+    new google.maps.Marker({position: new google.maps.LatLng(-43.520672,172.65847), map: map}); 
+    new google.maps.Marker({position: new google.maps.LatLng(-43.530672,172.64847), map: map}); 
+    new google.maps.Marker({position: new google.maps.LatLng(-43.540672,172.63847), map: map}); 
+    new google.maps.Marker({position: new google.maps.LatLng(-43.510672,172.62847), map: map}); 
+    new google.maps.Marker({position: new google.maps.LatLng(-43.500672,172.63847), map: map}); 
 
     // now load the tweets
     loadBackbone();
@@ -42,6 +47,7 @@
     }
     .item-block h2 {
         background-color: #eee;
+        background: url('bg.jpg');
         margin: -5px;
         padding: 5px;
         margin-bottom: 10px;
@@ -78,6 +84,7 @@
     }
     .item-block .data .date {
         color: #666;
+        font-size: 90%;
 
     }
     .item-block #map_canvas {
@@ -118,21 +125,19 @@
 
   	<div class="span-8">
         <div class="span-7 item-block">
-            <h2>Latest news</h2>
+            <h2>#eqnz</h2>
             <div class="link-bar"><strong>Filtering:</strong> <a href="#">Strict</a> &nbsp;|&nbsp; <a href="#">Loose</a> &nbsp;|&nbsp; <a href="#">Off</a></div>
             <div id="mydiv">Loading...</div>
         </div>
   	</div>
   	<div class="span-8">
         <div class="span-7 item-block">
-            <h2>Map view</h2>
             <div id="map_canvas"></div>
             <a href="#">View full size map</a>
         </div>
         <div class="span-7 item-block">
-            <h2>Latest photos</h2>
             <div id="photo-gallery">
-                <img src="floodpics/pic5.jpg" width="262" height="160" alt="Gallery Picture" />
+                <img src="quake.jpg" width="262" height="160" alt="Gallery Picture" />
             </div>
         </div>
   	</div>
@@ -141,14 +146,6 @@
             <h2>Get involved</h2>
             <h4>You can help by filtering the raw data feed<h4>
             <input type="button" name="getinvolved" value="Get Started!" class="launch-button"/>
-        </div>
-        <div class="span-7 item-block">
-            <h2>Tags and location</h2>
-            <strong>Tags</strong><br />
-            <p><a href="#">Petrol</a> <a href="#">Water</a> <a href="#">Incident</a> <a href="#">Transport</a> <a href="#">HelpMe</a> <a href="#">Trains</a> <a href="#">Tube</a> <a href="#">Hospitals</a> <a href="#">Groceries</a> <a href="#">Forecasts</a></p>
-            <strong>Location</strong><br />
-            <p><a href="#">North</a> <a href="#">South</a> <a href="#">East</a> <a href="#">West</a> <a href="#">Central</a> <a href="#">Ealing</a>
-            <a href="#">Westminster</a> <a href="#">Harrow</a> <a href="#">Tottenham</a> <a href="#">Camden</a> <a href="#">Croyden</a> <a href="#">Hammersmith</a> <a href="#">Lambeth</a> <a href="#">Merton</a> <a href="#">Hounslow</a> <a href="#">Lewisham</a> <a href="#">Harrow</a> <a href="#">Wandsworth</a> <a href="#">Richmond</a> <a href="#">Sutton</a> <a href="#">Southwark</a></p>
         </div>
         <div class="span-7 item-block">
             <h2>User contributions</h2>
@@ -178,8 +175,8 @@
             <div class="tweet">
                 <div class="user"><img src="<%= profile_url %>" width="40" height="40" /></div>
                 <div class="data">
-                    <div class="date"><%= timestamp %> by <%= user %></div>
                     <div class="content"><%= message %></div>
+                    <div class="date"><%= timestamp %> by <%= user %></div>
                 </div>
             </div>
 </script>

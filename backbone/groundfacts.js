@@ -68,14 +68,12 @@ var loadBackbone = function() {
             });
             return this;
         },
-        
-    });
 
-    window.AppView = new AppView;
-    $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
-        var rows = data.rows;
-        $.each(rows, function(index, item) {
-            var itemDate = item['value']['created_at'];
+        json2model: function(item) {
+                        console.log(item);
+            var myDate = new Date(Date.parse(item['value']['timestamp']));
+            var myHour = (myDate.getHours()>9) ? myDate.getHours() : '0'+myDate.getHours();
+            var itemDate = myHour+':'+myDate.getMinutes();
             var itemUser = item['value']['screen_name'];
             var itemProfileURL = item['value']['profile_image_url'];
             var itemLat = item['value']['lat'];
@@ -89,19 +87,32 @@ var loadBackbone = function() {
                 lon: itemLon,
                 message: TwitterText.auto_link(itemMessage)
             });
-            window.Tweets.add(myTweet);
+            return myTweet;
+        },
 
-            if (itemLat !== null && itemLon !== null) {
-                // add point to the map
-                var myLatlng = new google.maps.LatLng(itemLat,itemLon);
-                var marker = new google.maps.Marker({
-                    position: myLatlng, 
-                    map: map,
-                    title: itemMessage
-                }); 
-            }
-            
-        });
-    }, 'jsonp');
+        addAll: function(data) {
+            var rows = data.rows;
+            window.Tweets.reset();
+            $.each(rows, function(index, item) {
+                var myTweet = window.AppView.json2model(item);
+                window.Tweets.add(myTweet);
+                
+            });
+            window.AppView.renderAll();
+        },
+        
+    });
+
+    window.updateFeed = function () {
+        $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:10,descending:'true',reduce:'false'}, function(data) {
+            window.AppView.addAll(data);
+        }, 'jsonp');
+    };
+
+    window.AppView = new AppView;
+    window.updateFeed();
+
+    setInterval("window.updateFeed()", 1000);
+
 };
 

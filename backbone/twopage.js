@@ -65,7 +65,9 @@ $(function() {
             window.Tweets.add(newTweet);
         },
         json2model: function(item) {
-            var itemDate = item['value']['created_at'];
+            var myDate = new Date(Date.parse(item['value']['created_at']));
+            var itemDate = myDate.getHours()+':'+myDate.getMinutes();
+            //var itemDate = item['value']['created_at'];
             var itemUser = item['value']['screen_name'];
             var itemProfileURL = item['value']['profile_image_url'];
             var itemLat = item['value']['lat'];
@@ -124,16 +126,25 @@ $(function() {
         
     });
 
-    // get all data
+    window.updateFeed = function (type) {
+        if (type == 'all') {
+            // get all data
+            $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
+                window.AppView.addAll(data);
+            }, 'jsonp');
+        } else {
+            // get filtered data
+            $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
+                window.AppView.addFiltered(data);
+            }, 'jsonp');
+        }
+    };
     window.AppView = new AppView;
+    window.updateFeed('all');
+    window.updateFeed('filtered');
 
-    $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
-        window.AppView.addAll(data);
-    }, 'jsonp');
+    setInterval("window.updateFeed('all')", 10000);
+    setInterval("window.updateFeed('filtered')", 10000);
 
-    // get filtered data
-    $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:50,descending:'true',reduce:'false'}, function(data) {
-        window.AppView.addFiltered(data);
-    }, 'jsonp');
 });
 
