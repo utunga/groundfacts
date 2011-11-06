@@ -70,10 +70,10 @@ var loadBackbone = function() {
         },
 
         json2model: function(item) {
-                        console.log(item);
             var myDate = new Date(Date.parse(item['value']['timestamp']));
             var myHour = (myDate.getHours()>9) ? myDate.getHours() : '0'+myDate.getHours();
             var itemDate = myHour+':'+myDate.getMinutes();
+            var itemDate = item['value']['created_at'];
             var itemUser = item['value']['screen_name'];
             var itemProfileURL = item['value']['profile_image_url'];
             var itemLat = item['value']['lat'];
@@ -104,7 +104,7 @@ var loadBackbone = function() {
     });
 
     window.updateFeed = function () {
-        $.get('https://cloudant.com/db/occutweet/occ/_design/app/_view/tweetfall', {limit:10,descending:'true',reduce:'false'}, function(data) {
+        $.get('https://cloudant.com/db/occutweet/test/_design/app/_view/tweetfall', {limit:10,descending:'true',reduce:'false'}, function(data) {
             window.AppView.addAll(data);
         }, 'jsonp');
     };
