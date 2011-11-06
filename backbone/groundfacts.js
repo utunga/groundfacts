@@ -72,7 +72,8 @@ var loadBackbone = function() {
         json2model: function(item) {
             var myDate = new Date(Date.parse(item['value']['timestamp']));
             var myHour = (myDate.getHours()>9) ? myDate.getHours() : '0'+myDate.getHours();
-            var itemDate = myHour+':'+myDate.getMinutes();
+            var myMinutes = (myDate.getMinutes()>9) ? myDate.getMinutes() : '0'+myDate.getMinutes();
+            var itemDate = myHour+':'+myMinutes;
             //var itemDate = item['value']['created_at'];
             var itemUser = item['value']['screen_name'];
             var itemProfileURL = item['value']['profile_image_url'];
